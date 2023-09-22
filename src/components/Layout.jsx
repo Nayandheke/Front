@@ -5,7 +5,7 @@ import { Button } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { clearUser, setUser } from "../store";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.min.css";
 import { clearStorage, fromStorage } from "../lib";
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -14,10 +14,16 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 export const Layout = () => {
+    const [term, setTerm] = useState('')
     const [cartInfo, setCartInfo] = useState({ qty: 0, total: 0 })
     const user = useSelector((state) => state.user.value);
     const cart = useSelector((state) => state.cart.value);
+
+    
     const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+
     useEffect(() => {
         if (Object.keys(user).length == 0) {
             const token = fromStorage('130fronttoken')
@@ -29,6 +35,12 @@ export const Layout = () => {
             }
         }
     }, [user])
+
+    const handleSubmit = ev => {
+        ev.preventDefault()
+
+        navigate(`/search?term=${term}`)
+    }
 
     useEffect(() => {
         if (Object.keys(cart).length) {
@@ -115,21 +127,22 @@ export const Layout = () => {
                         <div className="col-12 bg-white pt-4">
                             <div className="row">
                                 <div className="col-lg-auto">
-                                    <div className="site-logo text-center text-lg-left">
-                                        <Link to="/">Suman's In-Fashion</Link>
+                                    <div className="site-logo text-center text-lg-left ms-4">
+                                        <Link to="/">E-commerse</Link>
                                     </div>
                                 </div>
                                 <div className="col-lg-5 mx-auto mt-4 mt-lg-0">
-                                    <form action="#">
+                                    <form onSubmit={handleSubmit}>
                                         <div className="form-group">
                                             <div className="input-group">
                                                 <input
                                                     type="search"
                                                     className="form-control border-dark"
                                                     placeholder="Search..."
-                                                    required
+                                                    name="term" onChange={ev => setTerm(ev.target.value)}
+                                                    required 
                                                 />
-                                                <button className="btn btn-outline-dark">
+                                                <button className="btn btn-outline-dark" type="submit">
                                                     <i className="fas fa-search"></i>
                                                 </button>
                                             </div>

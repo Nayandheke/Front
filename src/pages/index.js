@@ -5,5 +5,11 @@ import { Product } from "./Product"
 import { Register } from "./Register"
 import { Login } from "./Login"
 import { Cart } from "./Cart"
+import { Profile } from "./Profile"
+import { Orders } from "./Orders"
+import { Reviews } from "./Reviews"
+import { EditProfile } from "./EditProfile"
+import { Password } from "./Password"
+import { Search } from "./Search"
 
-export { Home, Category, Brand, Product, Register, Login , Cart}
+export { Home, Category, Brand, Product, Register, Login , Cart, Profile, Orders, Reviews,EditProfile,Password, Search}

@@ -10,11 +10,15 @@ import { Loading } from "../components"
 export const PrivateRoutes = ({element}) => {
 
     const user = useSelector(state => state.user.value)
+    const [loading, setLoading] = useState(false)
 
     const dispatch = useDispatch()
 
+    const navigate = useNavigate()
+
 
     useEffect(() => {
+        
         if (Object.keys(user).length == 0 ) {
             const token = fromStorage('130fronttoken')
 
@@ -22,12 +26,13 @@ export const PrivateRoutes = ({element}) => {
                 http.get('profile/details')
                     .then(({data})=> dispatch(setUser(data)))
                     .catch(err => {})
+                    
             }else{
                 toast.error('Please login to continue.')
                 navigate('/login')
             }
         }
     }, [user])
-    return loading ? < Loading /> : element
+    return loading ? <Loading /> : element
 
 }
