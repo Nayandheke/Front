@@ -128,7 +128,7 @@ export const Layout = () => {
                             <div className="row">
                                 <div className="col-lg-auto">
                                     <div className="site-logo text-center text-lg-left ms-4">
-                                        <Link to="/">E-commerse</Link>
+                                        <Link to="/">E-commerce </Link>
                                     </div>
                                 </div>
                                 <div className="col-lg-5 mx-auto mt-4 mt-lg-0">
